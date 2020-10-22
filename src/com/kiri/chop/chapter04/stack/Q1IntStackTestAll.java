@@ -2,7 +2,7 @@ package com.kiri.chop.chapter04.stack;
 
 import java.util.Scanner;
 
-public class IntStackTestAll {
+public class Q1IntStackTestAll {
 	public static void main(String[] args) {
 		Scanner stdIn = new Scanner(System.in);
 		IntStack s = new IntStack(64);
