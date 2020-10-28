@@ -70,6 +70,13 @@ public class IntQueue {
 		return -1;
 	}
 	
+	public int search(int x) {
+		for (int i = 0; i < num; i++)
+			if (que[(i + front) % max] == x)
+				return i + 1;
+		return 0;
+	}
+	
 	public void clear() {
 		num = front = rear = 0;
 	}
