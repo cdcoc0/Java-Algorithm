@@ -1,25 +1,40 @@
 package com.kiri.chop.chapter06.QuickSort;
 
 public class QuickSort2 {
+	
 	static void swap(int[] a, int idx1, int idx2) {
 		int t = a[idx1];
 		a[idx1] = a[idx2];
 		a[idx2] = t;
 	}
-	
-	static void quickSort2(int[] a, int n) {
-		int pl = 0;
-		int pr = n - 1;
-		int x = a[(pl + pr) / 2];
+	static void quickSort(int[] a, int left, int right) {
+		IntStack lstack = new IntStack(right - left + 1);
+		IntStack rstack = new IntStack(right - left + 1);
 		
-		do {
-			while(a[pl] < x) pl++;
-			while(a[pr] > x) pr--;
-			if(pl <= pr)
-				swap(a, pl++, pr--);
-		} while(pl <= pr);
+		lstack.push(left);
+		rstack.push(right);
 		
-		if(0 < pr) quickSort2(a, pr);
-		if(pl < n - 1) quickSort2(a, n);
+		while(lstack.isEmpty() != true) {
+			int pl = left = lstack.pop(); //왼쪽 커서
+			int pr = right = rstack.pop(); //오른쪽 커서
+			int x = a[(left + right) / 2]; //피벗
+			
+			do {
+				while(a[pl] < x) pl++;
+				while(x < a[pr]) pr--;
+				if(pl <= pr)
+					swap(a, pl++, pr--);
+			} while(pl <= pr);
+			
+			if(left < pr) {
+				lstack.push(left);
+				rstack.push(pr);
+			}
+			
+			if(pl < right) {
+				lstack.push(pl);
+				rstack.push(right);
+			}
+		}
 	}
 }
